@@ -1,0 +1,504 @@
+<devicedata>
+	<copyright>Copyright 2026 Zank C4 open source contributors. MIT License.</copyright>
+	<creator>Open Source (zank-c4)</creator>
+	<manufacturer>Android</manufacturer>
+	<name>Zank Android Remote</name>
+	<model>Zank Android Remote (AOSP / Android TV)</model>
+	<created>10/16/2026 09:00 AM</created>
+	<modified>@@MODIFIED@@</modified>
+	<version>@@VERSION@@</version>
+	<small image_source="c4z">icons/device_sm.png</small>
+	<large image_source="c4z">icons/device_lg.png</large>
+	<control>lua_gen</control>
+	<controlmethod>ip</controlmethod>
+	<driver>DriverWorks</driver>
+	<minimum_os_version>3.3.0</minimum_os_version>
+	<search_type>c4:av_gen</search_type>
+	<composer_categories>
+		<category>Audio/Video</category>
+	</composer_categories>
+	<proxies qty="2">
+		<proxy proxybindingid="5001" name="Zank Android Remote" primary="True" image_source="c4z" large_image="icons/device_lg.png" small_image="icons/device_sm.png">media_player</proxy>
+		<proxy proxybindingid="5002" name="Virtual Switcher">avswitch</proxy>
+	</proxies>
+	<events>
+		<event>
+			<id>1</id>
+			<name>App Launched</name>
+			<description>An app was launched on NAME</description>
+		</event>
+		<event>
+			<id>2</id>
+			<name>Device Online</name>
+			<description>NAME came online</description>
+		</event>
+		<event>
+			<id>3</id>
+			<name>Device Offline</name>
+			<description>NAME went offline</description>
+		</event>
+	</events>
+	<connections>
+		<!-- Media player proxy binding (remote control only, no AV connections) -->
+		<connection>
+			<id>5001</id>
+			<facing>6</facing>
+			<connectionname>Media Player</connectionname>
+			<type>2</type>
+			<consumer>False</consumer>
+			<audiosource>False</audiosource>
+			<videosource>True</videosource>
+			<linelevel>False</linelevel>
+			<classes>
+				<class>
+					<classname>MEDIA_PLAYER</classname>
+				</class>
+			</classes>
+		</connection>
+		<!-- Virtual Switcher: Android App inputs for mini apps, AV and room outputs to the TV or AVR -->
+		<connection>
+			<id>5002</id>
+			<facing>6</facing>
+			<connectionname>AVSWITCH</connectionname>
+			<type>2</type>
+			<consumer>False</consumer>
+			<audiosource>False</audiosource>
+			<videosource>False</videosource>
+			<linelevel>True</linelevel>
+			<classes>
+				<class>
+					<classname>AVSWITCH</classname>
+				</class>
+			</classes>
+		</connection>
+@@MINIAPP_INPUTS@@
+		<connection proxybindingid="5002">
+			<id>2100</id>
+			<facing>6</facing>
+			<connectionname>OUTPUT</connectionname>
+			<type>5</type>
+			<consumer>False</consumer>
+			<audiosource>False</audiosource>
+			<videosource>True</videosource>
+			<linelevel>True</linelevel>
+			<classes>
+				<class>
+					<classname>HDMI</classname>
+				</class>
+				<class>
+					<classname>COMPONENT</classname>
+				</class>
+				<class>
+					<classname>COMPOSITE</classname>
+				</class>
+				<class>
+					<classname>SVIDEO</classname>
+				</class>
+				<class>
+					<classname>VGA</classname>
+				</class>
+			</classes>
+		</connection>
+		<connection proxybindingid="5002">
+			<id>4100</id>
+			<facing>6</facing>
+			<connectionname>OUTPUT</connectionname>
+			<type>6</type>
+			<consumer>False</consumer>
+			<audiosource>True</audiosource>
+			<videosource>False</videosource>
+			<linelevel>True</linelevel>
+			<classes>
+				<class>
+					<classname>STEREO</classname>
+				</class>
+				<class>
+					<classname>DIGITAL_OPTICAL</classname>
+				</class>
+				<class>
+					<classname>DIGITAL_COAX</classname>
+				</class>
+			</classes>
+		</connection>
+		<connection proxybindingid="5002">
+			<id>7100</id>
+			<facing>6</facing>
+			<connectionname>Room Selection - OUTPUT</connectionname>
+			<type>7</type>
+			<consumer>False</consumer>
+			<audiosource>True</audiosource>
+			<videosource>True</videosource>
+			<linelevel>True</linelevel>
+			<classes>
+				<class>
+					<classname>AUDIO_SELECTION</classname>
+				</class>
+				<class>
+					<classname>AUDIO_VOLUME</classname>
+				</class>
+				<class>
+					<classname>VIDEO_SELECTION</classname>
+				</class>
+			</classes>
+		</connection>
+	</connections>
+	<config>
+		<power_management_method>AlwaysOn</power_management_method>
+		<power_command_delay>0</power_command_delay>
+		<power_delay>0</power_delay>
+		<power_command_needed>False</power_command_needed>
+		<script file="driver.lua"/>
+		<documentation file="www/documentation/index.html"/>
+		<properties>
+			<property>
+				<name>Driver Version</name>
+				<type>STRING</type>
+				<default></default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Connection Status</name>
+				<type>STRING</type>
+				<default>Not configured</default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Device Name</name>
+				<type>STRING</type>
+				<default></default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>IP Address</name>
+				<type>STRING</type>
+				<default></default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>UDP Port</name>
+				<type>RANGED_INTEGER</type>
+				<minimum>1</minimum>
+				<maximum>65535</maximum>
+				<default>1028</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>TCP Port</name>
+				<type>RANGED_INTEGER</type>
+				<minimum>1</minimum>
+				<maximum>65535</maximum>
+				<default>1029</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Key Mode</name>
+				<type>LIST</type>
+				<items>
+					<item>Zank Commands</item>
+					<item>Android Keycodes</item>
+				</items>
+				<default>Zank Commands</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Default Transport</name>
+				<type>LIST</type>
+				<items>
+					<item>UDP</item>
+					<item>TCP</item>
+				</items>
+				<default>UDP</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>TCP Framing</name>
+				<type>LIST</type>
+				<items>
+					<item>!len! header</item>
+					<item>Newline</item>
+					<item>None</item>
+				</items>
+				<default>!len! header</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Command Overrides</name>
+				<type>STRING</type>
+				<default></default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Key Repeat Rate (ms)</name>
+				<type>RANGED_INTEGER</type>
+				<minimum>50</minimum>
+				<maximum>1000</maximum>
+				<default>150</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Play/Pause Mode</name>
+				<type>LIST</type>
+				<items>
+					<item>Toggle</item>
+					<item>Discrete</item>
+				</items>
+				<default>Toggle</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Stop Button</name>
+				<type>LIST</type>
+				<items>
+					<item>Media Stop</item>
+					<item>Back</item>
+				</items>
+				<default>Media Stop</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Volume Handling</name>
+				<type>LIST</type>
+				<items>
+					<item>Audio Endpoint</item>
+					<item>Send to Box</item>
+				</items>
+				<default>Audio Endpoint</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>On Command</name>
+				<type>LIST</type>
+				<items>
+					<item>None</item>
+					<item>Wake</item>
+					<item>Home</item>
+				</items>
+				<default>None</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Off Command</name>
+				<type>LIST</type>
+				<items>
+					<item>None</item>
+					<item>Sleep</item>
+					<item>Home</item>
+				</items>
+				<default>None</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Info Button Action</name>
+				<type>LIST</type>
+				<items>
+					<item>Long press OK</item>
+					<item>Menu key</item>
+					<item>Info key</item>
+				</items>
+				<default>Long press OK</default>
+				<readonly>false</readonly>
+				<tooltip>What the Info button (and DVR, if enabled) sends. Long press OK opens info/context menus in Plex and most Android TV apps.</tooltip>
+			</property>
+			<property>
+				<name>DVR Button As Info</name>
+				<type>LIST</type>
+				<items>
+					<item>Off</item>
+					<item>On</item>
+				</items>
+				<default>Off</default>
+				<readonly>false</readonly>
+				<tooltip>On: the remote's DVR button does the same as Info (see Info Button Action).</tooltip>
+			</property>
+			<property>
+				<name>Passthrough Mode</name>
+				<type>LIST</type>
+				<items>
+					<item>On</item>
+					<item>Off</item>
+				</items>
+				<default>On</default>
+				<readonly>false</readonly>
+				<tooltip>On: mini apps stay selected and pass remote commands through. Off: this driver is reselected after the app launches.</tooltip>
+			</property>
+			<property>
+				<name>Red Button App</name>
+				<type>DYNAMIC_LIST</type>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Green Button App</name>
+				<type>DYNAMIC_LIST</type>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Yellow Button App</name>
+				<type>DYNAMIC_LIST</type>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Blue Button App</name>
+				<type>DYNAMIC_LIST</type>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Auto Fetch App List</name>
+				<type>LIST</type>
+				<items>
+					<item>Yes</item>
+					<item>No</item>
+				</items>
+				<default>Yes</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Installed Apps</name>
+				<type>STRING</type>
+				<default>0 found</default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Last Launched App</name>
+				<type>STRING</type>
+				<default></default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Log Incoming Data</name>
+				<type>LIST</type>
+				<items>
+					<item>No</item>
+					<item>Yes</item>
+				</items>
+				<default>No</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Debug Mode</name>
+				<type>LIST</type>
+				<items>
+					<item>Off</item>
+					<item>On</item>
+				</items>
+				<default>Off</default>
+				<readonly>false</readonly>
+			</property>
+		</properties>
+		<actions>
+			<action>
+				<name>Reconnect</name>
+				<command>Reconnect</command>
+			</action>
+			<action>
+				<name>Request App List</name>
+				<command>Request App List</command>
+			</action>
+			<action>
+				<name>Print Apps</name>
+				<command>Print Apps</command>
+			</action>
+			<action>
+				<name>Clear App List</name>
+				<command>Clear App List</command>
+			</action>
+			<action>
+				<name>Print Command Map</name>
+				<command>Print Command Map</command>
+			</action>
+			<action>
+				<name>Test D-Pad</name>
+				<command>Test D-Pad</command>
+			</action>
+			<action>
+				<name>Find Long Press Command</name>
+				<command>Find Long Press Command</command>
+			</action>
+			<action>
+				<name>Print Mini App Bindings</name>
+				<command>Print Mini App Bindings</command>
+			</action>
+		</actions>
+		<commands>
+			<command>
+				<name>Launch App</name>
+				<description>Launch PARAM1 on NAME</description>
+				<params>
+					<param>
+						<name>App</name>
+						<type>DYNAMIC_LIST</type>
+					</param>
+				</params>
+			</command>
+			<command>
+				<name>Launch Package</name>
+				<description>Launch package PARAM1 on NAME</description>
+				<params>
+					<param>
+						<name>Package</name>
+						<type>STRING</type>
+					</param>
+					<param>
+						<name>Activity</name>
+						<type>STRING</type>
+					</param>
+				</params>
+			</command>
+			<command>
+				<name>Send Key</name>
+				<description>Send key PARAM1 to NAME</description>
+				<params>
+					<param>
+						<name>Key</name>
+						<type>LIST</type>
+						<items>
+@@KEY_ITEMS@@
+						</items>
+					</param>
+				</params>
+			</command>
+			<command>
+				<name>Send Text</name>
+				<description>Type PARAM1 on NAME</description>
+				<params>
+					<param>
+						<name>Text</name>
+						<type>STRING</type>
+					</param>
+				</params>
+			</command>
+			<command>
+				<name>Open Deep Link</name>
+				<description>Open link PARAM1 on NAME</description>
+				<params>
+					<param>
+						<name>URL</name>
+						<type>STRING</type>
+					</param>
+				</params>
+			</command>
+			<command>
+				<name>Send Raw Command</name>
+				<description>Send raw PARAM1 over PARAM2 to NAME</description>
+				<params>
+					<param>
+						<name>Command</name>
+						<type>STRING</type>
+					</param>
+					<param>
+						<name>Transport</name>
+						<type>LIST</type>
+						<items>
+							<item>UDP</item>
+							<item>TCP</item>
+						</items>
+					</param>
+				</params>
+			</command>
+			<command>
+				<name>Refresh App List</name>
+				<description>Refresh the app list on NAME</description>
+				<params/>
+			</command>
+		</commands>
+	</config>
+</devicedata>
