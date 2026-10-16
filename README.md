@@ -1,5 +1,7 @@
 # Zank Android Remote for Control4 (open source)
 
+Unoffical API from https://github.com/duckyngo/Zank-Remote-for-Desktop 
+
 IP control of Android / AOSP TV boxes from Control4 through the **Zank Remote** app running on the box. Built for boxes where the official Android TV remote protocol is not available (no Google certification, no Android TV Remote Service).
 
 Includes:
