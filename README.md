@@ -11,7 +11,7 @@ Includes:
 - **Custom mini app** (`zank_miniapp_custom.c4z`) - add as many as you like; set the app name and Android package in Composer.
 - **Tools** - `zank_capture.py` to learn the exact command strings your Zank version uses, and `zank_cli.py` to test commands against a box.
 
-MIT licensed. Not affiliated with Zank, Chowmain, Google or Snap One.
+MIT licensed. Not affiliated with Zank
 
 ## Important: confirm the command strings first
 
