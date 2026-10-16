@@ -1,0 +1,146 @@
+<devicedata>
+	<copyright>Copyright 2026 Zank C4 open source contributors. MIT License.</copyright>
+	<creator>Open Source (zank-c4)</creator>
+	<manufacturer>Zank Mini App</manufacturer>
+	<name>@@NAME@@</name>
+	<model>@@MODEL@@</model>
+	<created>10/16/2026 09:00 AM</created>
+	<modified>@@MODIFIED@@</modified>
+	<version>@@VERSION@@</version>
+	<small image_source="c4z">icons/device_sm.png</small>
+	<large image_source="c4z">icons/device_lg.png</large>
+	<control>lua_gen</control>
+	<controlmethod>other</controlmethod>
+	<driver>DriverWorks</driver>
+	<minimum_os_version>3.3.0</minimum_os_version>
+	<search_type>c4:av_gen</search_type>
+	<composer_categories>
+		<category>Audio/Video</category>
+	</composer_categories>
+	<capabilities>
+		<navigator_display_option proxybindingid="5001">
+			<display_icons>
+				<Icon width="70" height="70">controller://driver/@@DRIVER_FILE@@/icons/experience_70.png</Icon>
+				<Icon width="90" height="90">controller://driver/@@DRIVER_FILE@@/icons/experience_90.png</Icon>
+				<Icon width="300" height="300">controller://driver/@@DRIVER_FILE@@/icons/experience_300.png</Icon>
+				<Icon width="512" height="512">controller://driver/@@DRIVER_FILE@@/icons/experience_512.png</Icon>
+			</display_icons>
+		</navigator_display_option>
+	</capabilities>
+	<proxies>
+		<proxy proxybindingid="5001" name="@@NAME@@" primary="True" image_source="c4z" large_image="icons/device_lg.png" small_image="icons/device_sm.png">media_player</proxy>
+	</proxies>
+	<connections>
+		<connection>
+			<id>5001</id>
+			<facing>6</facing>
+			<connectionname>Media Player</connectionname>
+			<type>2</type>
+			<consumer>False</consumer>
+			<audiosource>False</audiosource>
+			<videosource>True</videosource>
+			<linelevel>False</linelevel>
+			<classes>
+				<class>
+					<classname>MEDIA_PLAYER</classname>
+				</class>
+			</classes>
+		</connection>
+		<connection proxybindingid="5001">
+			<id>2000</id>
+			<facing>6</facing>
+			<connectionname>@@OUT_NAME@@</connectionname>
+			<type>5</type>
+			<consumer>False</consumer>
+			<audiosource>False</audiosource>
+			<videosource>True</videosource>
+			<linelevel>True</linelevel>
+			<classes>
+				<class>
+					<classname>RF_ANDROID_APP</classname>
+				</class>
+			</classes>
+		</connection>
+		<connection proxybindingid="5001">
+			<id>7000</id>
+			<facing>6</facing>
+			<connectionname>Room Selection</connectionname>
+			<type>7</type>
+			<consumer>False</consumer>
+			<audiosource>False</audiosource>
+			<videosource>True</videosource>
+			<linelevel>True</linelevel>
+			<classes>
+				<class>
+					<classname>VIDEO_SELECTION</classname>
+				</class>
+			</classes>
+		</connection>
+	</connections>
+	<config>
+		<power_management_method>AlwaysOn</power_management_method>
+		<power_command_delay>0</power_command_delay>
+		<power_delay>0</power_delay>
+		<power_command_needed>False</power_command_needed>
+		<script file="driver.lua"/>
+		<properties>
+			<property>
+				<name>Driver Version</name>
+				<type>STRING</type>
+				<default></default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Status</name>
+				<type>STRING</type>
+				<default></default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>App Name</name>
+				<type>STRING</type>
+				<default>@@APP_NAME@@</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Package</name>
+				<type>STRING</type>
+				<default>@@PACKAGE@@</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Activity</name>
+				<type>STRING</type>
+				<default></default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Debug Mode</name>
+				<type>LIST</type>
+				<items>
+					<item>Off</item>
+					<item>On</item>
+				</items>
+				<default>Off</default>
+				<readonly>false</readonly>
+			</property>
+		</properties>
+		<actions>
+			<action>
+				<name>Launch Now</name>
+				<command>Launch Now</command>
+			</action>
+			<action>
+				<name>Check Binding</name>
+				<command>Check Binding</command>
+			</action>
+		</actions>
+		<commands>
+			<command>
+				<name>Launch</name>
+				<description>Launch NAME</description>
+				<params/>
+			</command>
+		</commands>
+	</config>
+</devicedata>
