@@ -33,9 +33,7 @@ Alternative: set **Key Mode** to **Android Keycodes**, which sends every key as 
 ## Prepare the Android box
 
 1. Give the box a DHCP reservation (static IP).
-2. Enable Developer options (Settings > Device Preferences > About > press Build 7 times) and turn on USB debugging. Zank uses it for its fast control mode.
 3. Install **Zank Remote** on the box, open it, allow the debugging prompt ("Always allow"), and enable its accessibility service when asked.
-4. Disable automatic app updates on the box if possible; an update can stop Zank running in the background.
 5. Confirm with the Zank phone app that you can control the box.
 6. Optional check from a PC: `python3 tools/zank_cli.py <box-ip> name` should print the box name.
 
@@ -61,11 +59,9 @@ Package differs on your box? Change the mini app's **Package** property. **Print
 
 **Passthrough Mode** (remote driver): **On** keeps the mini app selected in Navigator. **Off** reselects the Virtual Switcher after the app launches.
 
-The Android App inputs use the `RF_ANDROID_APP` connection class, which existing Chowmain-style Android mini apps also use. The driver finds the app to launch from the mini app's package variable, then its app name, then its Composer name ("YouTube (Android TV)" matches YouTube).
+The Android App inputs use the `RF_ANDROID_APP` connection class. The driver finds the app to launch from the mini app's package variable.
 
 ## Mini app icons
-
-The mini apps ship with plain name tiles. App logos belong to their owners and aren't bundled, but you can add the real ones for your install:
 
 - From the apps on the box (needs `adb`; USB debugging is already on for Zank): `python3 tools/import_icons.py from-box <box-ip>`
 - From an image, a `.c4z` you own, or an `.apk`: `python3 tools/import_icons.py from-file netflix path/to/file`
@@ -130,8 +126,6 @@ Reconnect, Request App List, Print Apps, Clear App List, Print Command Map, Test
 
 - Power: Android boxes cannot be powered on over IP. **On Command** / **Off Command** can send wake/sleep or home.
 - Not for TVs running Android TV OS (no input switching or power on).
-- Navigator does not show an on-screen app grid; use mini apps, colour buttons or programming.
-- Untested on hardware at release. Validate with the capture tool and Print Command Map before deploying.
 
 ## Building from source
 
