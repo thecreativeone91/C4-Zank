@@ -1,0 +1,30 @@
+{
+  "_comment": "Preset mini apps. Each entry becomes its own mini app driver (zank_miniapp_<id>.c4z) and is also known to the main driver by name. 'package' is the Android package name. Run 'Print Apps' on the main driver to confirm the exact package installed on your box, and use the mini app's 'Package Override' property if it differs.",
+  "apps": [
+    {"id": "netflix",      "name": "Netflix",        "package": "com.netflix.ninja"},
+    {"id": "youtube",      "name": "YouTube",        "package": "com.google.android.youtube.tv"},
+    {"id": "smarttube",    "name": "SmartTube",      "package": "com.teamsmart.videomanager.tv"},
+    {"id": "youtubetv",    "name": "YouTube TV",     "package": "com.google.android.youtube.tvunplugged"},
+    {"id": "primevideo",   "name": "Prime Video",    "package": "com.amazon.amazonvideo.livingroom"},
+    {"id": "disneyplus",   "name": "Disney+",        "package": "com.disney.disneyplus"},
+    {"id": "hulu",         "name": "Hulu",           "package": "com.hulu.livingroomplus"},
+    {"id": "max",          "name": "Max",            "package": "com.wbd.stream"},
+    {"id": "appletv",      "name": "Apple TV",       "package": "com.apple.atve.androidtv.appletv"},
+    {"id": "paramountplus","name": "Paramount+",     "package": "com.cbs.ott"},
+    {"id": "peacock",      "name": "Peacock",        "package": "com.peacocktv.peacockandroid"},
+    {"id": "plex",         "name": "Plex",           "package": "com.plexapp.android"},
+    {"id": "jellyfin",     "name": "Jellyfin",       "package": "org.jellyfin.androidtv"},
+    {"id": "emby",         "name": "Emby",           "package": "tv.emby.embyatv"},
+    {"id": "kodi",         "name": "Kodi",           "package": "org.xbmc.kodi"},
+    {"id": "spotify",      "name": "Spotify",        "package": "com.spotify.tv.android"},
+    {"id": "sling",        "name": "Sling TV",       "package": "com.sling"},
+    {"id": "plutotv",      "name": "Pluto TV",       "package": "tv.pluto.android"},
+    {"id": "tubi",         "name": "Tubi",           "package": "com.tubitv"},
+    {"id": "twitch",       "name": "Twitch",         "package": "tv.twitch.android.app"},
+    {"id": "crunchyroll",  "name": "Crunchyroll",    "package": "com.crunchyroll.crunchyroid"},
+    {"id": "espn",         "name": "ESPN",           "package": "com.espn.gtv"},
+    {"id": "steamlink",    "name": "Steam Link",     "package": "com.valvesoftware.steamlink"},
+    {"id": "stremio",      "name": "Stremio",        "package": "com.stremio.one"},
+    {"id": "settings",     "name": "Android Settings","package": "com.android.tv.settings"}
+  ]
+}
